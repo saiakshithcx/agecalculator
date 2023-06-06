@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Age Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    
+    .input-group {
+      margin-bottom: 10px;
+    }
+    
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+    }
+    
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Age Calculator</h2>
+    <div class="input-group">
+      <label for="birthdate">Enter your birthdate:</label>
+      <input type="date" id="birthdate">
+    </div>
+    <button onclick="calculateAge()">Calculate</button>
+    <button onclick="resetForm()">Reset</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculateAge() {
+      var birthdate = document.getElementById('birthdate').value;
+      var birthTime = new Date(birthdate).getTime();
+      var currentTime = new Date().getTime();
+      var diff = currentTime - birthTime;
+
+      var years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+      var months = Math.floor((diff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+      var days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      var result =
+        "Years: " + years + "<br>" +
+        "Months: " + months + "<br>" +
+        "Days: " + days + "<br>" +
+        "Hours: " + hours + "<br>" +
+        "Minutes: " + minutes + "<br>" +
+        "Seconds: " + seconds;
+
+      document.getElementById('result').innerHTML = result;
+    }
+
+    function resetForm() {
+      document.getElementById('birthdate').value = "";
+      document.getElementById('result').innerHTML = "";
+    }
+  </script>
+</body>
+</html>
